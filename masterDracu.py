@@ -68,6 +68,7 @@ def main():
 
     # initialize sounds/music
     burningSound = pygame.mixer.Sound('includes/sounds/Over.wav')
+    pygame.mixer.music.load('includes/sounds/GameMusic.wav')
     
     # Used to manage how fast the screen updates
     clock = pygame.time.Clock()
@@ -182,7 +183,7 @@ def main():
                 # ALL CODE FOR PLAY BUTTON INTERACTION GOES ABOVE THIS COMMENT
                       
             if music and play:
-                pygame.mixer.music.load('includes/sounds/GameMusic.wav')
+                pygame.mixer.music.play(10)
                 music = False
                 
         textSurface, textRect = display_text(constants.WHITE,"Score: "+str(score), 20, 550, 550, 150, 50,)
