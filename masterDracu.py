@@ -91,7 +91,8 @@ def main():
                 pygame.mixer.Sound('includes/sounds/Over.wav').play()
                 menu = True
                 over = True
-                    
+                
+        # -------- Menu -----------            
         if menu:
             # ALL CODE FOR MENU GOES BELOW THIS COMMENT
             score = score
@@ -123,7 +124,7 @@ def main():
                     break
                 else:
                     quit_color = constants.RED
-        # ALL CODE FOR MENU GOES ABOVE THIS COMMENT
+        # -------- End of Menu -----------  
 
         if not over:
             # Update the player.
