@@ -1,6 +1,5 @@
 """
-This module is used to hold the Player class. The Player represents the user-
-controlled sprite on the screen.
+This module is for Dracu's moving customes
 """
 import pygame
  
@@ -45,7 +44,7 @@ class Dracu(pygame.sprite.Sprite):
         # Set a referance to the image rect.
         self.rect = self.image.get_rect()
 
-        burningDracu = sprite_sheet.get_image(134, 0, 61, 85)
+        self.burningDracu = sprite_sheet.get_image(134, 0, 61, 85)
  
     def update(self):
         
@@ -56,9 +55,6 @@ class Dracu(pygame.sprite.Sprite):
             # set our right side to the left side of the item we hit
             if self.change_x > 0:
                 self.rect.right = block.rect.left
-            elif self.change_x < 0:
-                # Otherwise if we are moving left, do the opposite.
-                self.rect.left = block.rect.right
 
             self.hit_flag = True
             break;
