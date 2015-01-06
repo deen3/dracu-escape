@@ -91,12 +91,13 @@ def main():
         # if the game doesn't display menu
         if not menu:
             if dracu.hit_flag == True:
-                dracu.image = dracu.burningDracu
-                
                 #stop background music
                 pygame.mixer.music.stop()
                 # play sound effect dracu burning
                 burningSound.play()
+
+                dracu.update()
+                
                 menu = True
                 over = True
                 

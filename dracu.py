@@ -57,6 +57,7 @@ class Dracu(pygame.sprite.Sprite):
                 self.rect.right = block.rect.left
 
             self.hit_flag = True
+            self.image = self.burningDracu
             break;
  
         # Move up/down
@@ -73,18 +74,20 @@ class Dracu(pygame.sprite.Sprite):
                 self.rect.top = block.rect.bottom
 
             self.hit_flag = True
+            self.image = self.burningDracu
             break;
 
-        """ Move the player. """
+        """ Move dracu. """
         # Gravity
         self.calc_grav()
  
-        # Move left/right
+        # Move to the right
         self.rect.x += self.change_x
         pos = self.rect.x + self.level.world_shift
 
-        frame = (pos // 30) % len(self.running_dracu)
-        self.image = self.running_dracu[frame]
+        if not self.hit_flag:
+            frame = (pos // 30) % len(self.running_dracu)
+            self.image = self.running_dracu[frame]
         
     def calc_grav(self):
         """ Calculate effect of gravity. """
@@ -94,9 +97,9 @@ class Dracu(pygame.sprite.Sprite):
             self.change_y += .5
  
         # See if we are on the ground.
-        if self.rect.y >= 400 and self.change_y >= 0: #constants.SCREEN_HEIGHT - self.rect.height
+        if self.rect.y >= 400 and self.change_y >= 0: 
             self.change_y = 0
-            self.rect.y = 400 #constants.SCREEN_HEIGHT - self.rect.height
+            self.rect.y = 400 
             
     def jump(self):
         """ Called when user hits 'jump' button. """
