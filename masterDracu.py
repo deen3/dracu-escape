@@ -10,7 +10,7 @@ import time
 import constants
 import levels
  
-from player import Player
+from dracu import Dracu
 
 def display_text(color, text, font_size, x, y, w, h):
     pygame.font.init()
@@ -37,24 +37,24 @@ def main():
     pygame.display.set_icon(icon)
     
     # Create the player
-    player = Player()
+    dracu = Dracu()
  
     # Create all the levels
     level_list = []
-    level_list.append(levels.Level_01(player))
-    level_list.append(levels.Level_02(player))
-    level_list.append(levels.Level_03(player))
+    level_list.append(levels.Level_01(dracu))
+    level_list.append(levels.Level_02(dracu))
+    level_list.append(levels.Level_03(dracu))
  
     # Set the current level
     current_level_no = 0
     current_level = level_list[current_level_no]
  
     active_sprite_list = pygame.sprite.Group()
-    player.level = current_level
+    dracu.level = current_level
  
-    player.rect.x = 340
-    player.rect.y = 400#constants.SCREEN_HEIGHT - player.rect.height 
-    active_sprite_list.add(player)
+    dracu.rect.x = 340
+    dracu.rect.y = 400#constants.SCREEN_HEIGHT - player.rect.height 
+    active_sprite_list.add(dracu)
  
     # Loop until the user clicks the close button.
     done = False
@@ -86,11 +86,11 @@ def main():
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP or event.key == pygame.K_SPACE:
-                    player.jump()
+                    dracu.jump()
                         
         # if the game doesn't display menu
         if not menu:
-            if player.hit_flag == True:
+            if dracu.hit_flag == True:
                 #stop background music
                 pygame.mixer.music.stop()
                 # play sound effect dracu burning
@@ -139,20 +139,20 @@ def main():
             # Update items in the level
             current_level.update()
  
-            # If the player gets near the right side, shift the world left (-x)
-            if player.rect.right >= 300:
-                diff = player.rect.right - 300
-                player.rect.right = 300
+            # If the dracu gets near the right side, shift the world left (-x)
+            if dracu.rect.right >= 300:
+                diff = dracu.rect.right - 300
+                dracu.rect.right = 300
                 current_level.shift_world(-diff)
 
             # If the player gets to the end of the level, go to the next level
-            current_position = player.rect.x + current_level.world_shift
+            current_position = dracu.rect.x + current_level.world_shift
             if current_position < current_level.level_limit:
-                player.rect.x = 120
+                dracu.rect.x = 120
                 if current_level_no < len(level_list)-1:
                     current_level_no += 1
                     current_level = level_list[current_level_no]
-                    player.level = current_level
+                    dracu.level = current_level
                 else:
                     menu = True
                     notif = "YOU WIN!"
@@ -177,7 +177,7 @@ def main():
                     play_color = constants.B_GREEN
                     if click[0] == 1:
                         play = True
-                        player.go_right()
+                        dracu.go_right()
                 else:
                     play_color = constants.GREEN
                 # ALL CODE FOR PLAY BUTTON INTERACTION GOES ABOVE THIS COMMENT
