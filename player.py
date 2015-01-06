@@ -46,17 +46,7 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
  
     def update(self):
-        """ Move the player. """
-        # Gravity
-        self.calc_grav()
- 
-        # Move left/right
-        self.rect.x += self.change_x
-        pos = self.rect.x + self.level.world_shift
-
-        frame = (pos // 30) % len(self.running_dracu)
-        self.image = self.running_dracu[frame]
-
+        
         # See if we hit anything
         block_hit_list = pygame.sprite.spritecollide(self, self.level.fire_list, False)
         for block in block_hit_list:
@@ -69,6 +59,7 @@ class Player(pygame.sprite.Sprite):
                 self.rect.left = block.rect.right
 
             self.hit_flag = True
+            break;
  
         # Move up/down
         self.rect.y += self.change_y
@@ -84,7 +75,19 @@ class Player(pygame.sprite.Sprite):
                 self.rect.top = block.rect.bottom
 
             self.hit_flag = True
+            break;
+
+        """ Move the player. """
+        # Gravity
+        self.calc_grav()
  
+        # Move left/right
+        self.rect.x += self.change_x
+        pos = self.rect.x + self.level.world_shift
+
+        frame = (pos // 30) % len(self.running_dracu)
+        self.image = self.running_dracu[frame]
+        
     def calc_grav(self):
         """ Calculate effect of gravity. """
         if self.change_y == 0:
