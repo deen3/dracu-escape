@@ -74,23 +74,24 @@ def main():
     score = 0
  
     # -------- Main Program Loop -----------
-    while not done and not over:
+    while not done or not over:
         for event in pygame.event.get(): # User did something
             if event.type == pygame.QUIT: # If user clicked close
                 done = True # Flag that we are done so we exit this loop
                 over = True
 
-            # if the game doesn't display menu
-            if not menu:
-                if player.hit_flag == True:
-                    # play sound effect
-                    pygame.mixer.Sound('includes/sounds/Over.wav').play()
-                    menu = True
-                    over = True
-
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_UP or event.key == pygame.K_SPACE:
-                        player.jump()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_UP or event.key == pygame.K_SPACE:
+                    player.jump()
+                        
+        # if the game doesn't display menu
+        if not menu:
+            if player.hit_flag == True:
+                # play sound effect
+                pygame.mixer.Sound('includes/sounds/Over.wav').play()
+                menu = True
+                over = True
+                    
         if menu:
             # ALL CODE FOR MENU GOES BELOW THIS COMMENT
             score = score
@@ -109,6 +110,7 @@ def main():
 
             if 100+200 > mouse[0] > 100 and 400+100 > mouse[1] > 400:
                 play_color = constants.B_GREEN
+                print("Play Again Hovered " + str(menu))
                 if click[0] == 1:
                     main()
                 else:
