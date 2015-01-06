@@ -91,6 +91,37 @@ def main():
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_UP or event.key == pygame.K_SPACE:
                         player.jump()
+        if menu:
+            # ALL CODE FOR MENU GOES BELOW THIS COMMENT
+            score = score
+            textSurface, textRect = display_text(constants.B_GREEN, notif, 100, 300, 100, 250, 100)
+            screen.blit(textSurface, textRect)
+            textSurface, textRect = display_text(constants.WHITE, str(score), 50, 350, 200, 250, 100)
+            screen.blit(textSurface, textRect)
+
+            textSurface, textRect = display_text(play_color, "Play Again", 50, 100, 400, 200, 100)
+            screen.blit(textSurface, textRect)
+            textSurface, textRect = display_text(quit_color, "Quit", 50, 500, 400, 200, 100)
+            screen.blit(textSurface, textRect)
+
+            mouse = pygame.mouse.get_pos()
+            click = pygame.mouse.get_pressed()
+
+            if 100+200 > mouse[0] > 100 and 400+100 > mouse[1] > 400:
+                play_color = constants.B_GREEN
+                if click[0] == 1:
+                    main()
+                else:
+                    play_color = constants.GREEN
+                    
+            if 500+200 > mouse[0] > 500 and 400+100 > mouse[1] > 400:
+                quit_color = constants.B_RED
+                if click[0] == 1:
+                    pygame.quit()
+                    break
+                else:
+                    quit_color = constants.RED
+        # ALL CODE FOR MENU GOES ABOVE THIS COMMENT
 
         if not over:
             # Update the player.
@@ -146,54 +177,22 @@ def main():
                 pygame.mixer.Sound('includes/sounds/GameMusic.wav').play()
                 music = False
                 
-            textSurface, textRect = display_text(constants.WHITE,"Score: "+str(score), 20, 550, 550, 150, 50,)
-            screen.blit(textSurface, textRect)
+        textSurface, textRect = display_text(constants.WHITE,"Score: "+str(score), 20, 550, 550, 150, 50,)
+        screen.blit(textSurface, textRect)
 
-            screen.blit(logo,(5,545))
+        screen.blit(logo,(5,545))
 
-            # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
+        # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
 
-            if not menu:
-                # scoring depends on time
-                score += 1
+        if not menu:
+            # scoring depends on time
+            score += 1
      
-            # Limit to 120 frames per second
-            clock.tick(480) 
+        # Limit to 120 frames per second
+        clock.tick(480) 
      
-            # Updating the screen...
-            pygame.display.flip()
-        else:
-            if menu:
-                # ALL CODE FOR MENU GOES BELOW THIS COMMENT
-                score = score
-                textSurface, textRect = display_text(constants.B_GREEN, notif, 100, 300, 100, 250, 100)
-                screen.blit(textSurface, textRect)
-                textSurface, textRect = display_text(constants.WHITE, str(score), 50, 350, 200, 250, 100)
-                screen.blit(textSurface, textRect)
-
-                textSurface, textRect = display_text(play_color, "Play Again", 50, 100, 400, 200, 100)
-                screen.blit(textSurface, textRect)
-                textSurface, textRect = display_text(quit_color, "Quit", 50, 500, 400, 200, 100)
-                screen.blit(textSurface, textRect)
-
-                mouse = pygame.mouse.get_pos()
-                click = pygame.mouse.get_pressed()
-
-                if 100+200 > mouse[0] > 100 and 400+100 > mouse[1] > 400:
-                    play_color = constants.B_GREEN
-                    if click[0] == 1:
-                        main()
-                    else:
-                        play_color = constants.GREEN
-                        
-                if 500+200 > mouse[0] > 500 and 400+100 > mouse[1] > 400:
-                    quit_color = constants.B_RED
-                    if click[0] == 1:
-                        pygame.quit()
-                        break
-                    else:
-                        quit_color = constants.RED
-                # ALL CODE FOR MENU GOES ABOVE THIS COMMENT
+        # Updating the screen...
+        pygame.display.flip()
  
 if __name__ == "__main__":
     main()
