@@ -65,7 +65,10 @@ def main():
     # font color of PLAY to be interactive
     play_color = constants.GREEN
     quit_color = constants.RED
- 
+
+    # initialize sounds/music
+    burningSound = pygame.mixer.Sound('includes/sounds/Over.wav')
+    
     # Used to manage how fast the screen updates
     clock = pygame.time.Clock()
 
@@ -87,8 +90,10 @@ def main():
         # if the game doesn't display menu
         if not menu:
             if player.hit_flag == True:
-                # play sound effect
-                pygame.mixer.Sound('includes/sounds/Over.wav').play()
+                #stop background music
+                pygame.mixer.music.stop()
+                # play sound effect dracu burning
+                burningSound.play()
                 menu = True
                 over = True
                 
@@ -177,7 +182,7 @@ def main():
                 # ALL CODE FOR PLAY BUTTON INTERACTION GOES ABOVE THIS COMMENT
                       
             if music and play:
-                pygame.mixer.Sound('includes/sounds/GameMusic.wav').play()
+                pygame.mixer.music.load('includes/sounds/GameMusic.wav')
                 music = False
                 
         textSurface, textRect = display_text(constants.WHITE,"Score: "+str(score), 20, 550, 550, 150, 50,)
