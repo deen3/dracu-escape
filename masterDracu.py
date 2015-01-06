@@ -117,7 +117,6 @@ def main():
 
             if 100+200 > mouse[0] > 100 and 400+100 > mouse[1] > 400:
                 play_color = constants.B_GREEN
-                print("Play Again Hovered " + str(menu))
                 if click[0] == 1:
                     main()
                 else:
