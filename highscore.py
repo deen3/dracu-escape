@@ -14,6 +14,7 @@ class Highscore(Frame):
         self.master = master
  
         self.init_window()
+        self.show_highscore()
  
     def init_window(self):
         # changing the title of our master widget      
@@ -33,6 +34,13 @@ class Highscore(Frame):
         img = Label(self, image=bg)
         img.image = bg
         img.place(x=-2, y=-2)
+
+    def show_highscore(self):
+        fr = Frame (self, width=50, height=45).place(x=60, y=200)
+        # make a listbox
+        self.lb = Listbox(self, bd=0, activestyle="dotbox", bg="gray", height=15, width=20, font=("Agency FB", 16))
+        #self.lb.bind('<Double-Button-1>',self.lbSelected)
+        self.lb.place(x=45, y=180)
 
 root = Tk()
 root.geometry("800x600")
