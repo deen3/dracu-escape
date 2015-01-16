@@ -1,7 +1,7 @@
 """
 As per requirement in Game Development
 DEVELOPER - DINA M. FAJARDO
-fajardod91@yahoo.co.ph
+fajardod91@yahoo.com.ph
 """
  
 import pygame
