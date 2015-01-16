@@ -53,7 +53,7 @@ def main():
     dracu.level = current_level
  
     dracu.rect.x = 340
-    dracu.rect.y = 400#constants.SCREEN_HEIGHT - player.rect.height 
+    dracu.rect.y = 400
     active_sprite_list.add(dracu)
  
     # Loop until the user clicks the close button.
@@ -165,10 +165,18 @@ def main():
             current_level.draw(screen)
             active_sprite_list.draw(screen)
 
+            # -------- Prompt to Start Game -----------  
             if not play:
-                #pygame.draw.rect(screen, (40, 40, 40), (300, 100, 250, 100))
+                # display interactive buttons // display_text(color, text, font_size, x, y, w, h):
                 textSurface, textRect = display_text(play_color, "PLAY", 100, 300, 100, 250, 100)
                 screen.blit(textSurface, textRect)
+
+                textSurface, textRect = display_text(play_color, "HIGH SCORES", 50, 100, 500, 250, 100)
+                screen.blit(textSurface, textRect)
+
+                textSurface, textRect = display_text(play_color, "OPTIONS", 50, 500, 500, 250, 100)
+                screen.blit(textSurface, textRect)
+                
                 score = 0
 
                 # ALL CODE FOR PLAY BUTTON INTERACTION GOES BELOW THIS COMMENT  
@@ -183,7 +191,9 @@ def main():
                 else:
                     play_color = constants.GREEN
                 # ALL CODE FOR PLAY BUTTON INTERACTION GOES ABOVE THIS COMMENT
-                      
+
+            # -------- End of Prompt to Start Game -----------
+             
             if music and play:
                 pygame.mixer.music.play(10)
                 music = False
