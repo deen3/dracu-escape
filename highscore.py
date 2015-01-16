@@ -45,11 +45,11 @@ class Highscore(Frame):
 
         # put values in lb from db
         conn = sqlite3.connect("dracuDb.s3db")
-        cur = conn.execute("SELECT * FROM dracuTbl ORDER BY dracuDb_score")
+        cur = conn.execute("SELECT dracuDb_score FROM dracuTbl ORDER BY dracuDb_score")
         try:
             first_row = next(cur)
             for row in chain((first_row,),cur):
-                self.lb.insert(END, str(row[1])+" --- "+str(row[2]))
+                self.lb.insert(END, str(row[0])+" --- "+str(row[0]))
         except StopIteration as e:
             self.lb.insert(END,"Empty Record")
 
