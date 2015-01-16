@@ -23,7 +23,9 @@ class Highscore(Frame):
 
         # load images to use
         icon = ImageTk.PhotoImage(Image.open("includes/img/icon.png"))
-        bg = ImageTk.PhotoImage(Image.open("includes/img/bg.png"))
+        bg = ImageTk.PhotoImage(Image.open("includes/img/bg.jpg"))
+        self.btn = ImageTk.PhotoImage(Image.open("includes/img/btn.png"))
+        self.btn2 = ImageTk.PhotoImage(Image.open("includes/img/btn2.png"))
         
         # setting the icon
         self.tk.call('wm', 'iconphoto', root._w, icon)
@@ -35,6 +37,19 @@ class Highscore(Frame):
         img = Label(self, image=bg)
         img.image = bg
         img.place(x=-2, y=-2)
+
+        # display buttons
+        self.btn1 = Button(self, bd=0, bg="black", image=self.btn)
+        self.btn1.image = self.btn
+        self.btn1.place(x=280, y=70)
+        self.btn1.bind('<Enter>', self.btn1Enter)
+        self.btn1.bind('<Leave>', self.btn1Leave)
+
+    def btn1Enter(self, event):
+        self.btn1.configure(image = self.btn2)
+
+    def btn1Leave(self, no):
+        self.btn1.configure(image = self.btn)
 
     def show_highscore(self):
         fr = Frame (self, width=50, height=45).place(x=60, y=200)
