@@ -171,25 +171,38 @@ def main():
                 textSurface, textRect = display_text(play_color, "PLAY", 100, 300, 100, 250, 100)
                 screen.blit(textSurface, textRect)
 
-                textSurface, textRect = display_text(play_color, "HIGH SCORES", 50, 100, 500, 250, 100)
+                textSurface, textRect = display_text(quit_color, "High Score", 50, 100, 400, 200, 100)
                 screen.blit(textSurface, textRect)
-
-                textSurface, textRect = display_text(play_color, "OPTIONS", 50, 500, 500, 250, 100)
+                
+                textSurface, textRect = display_text(quit_color, "Options", 50, 500, 400, 200, 100)
                 screen.blit(textSurface, textRect)
                 
                 score = 0
 
-                # ALL CODE FOR PLAY BUTTON INTERACTION GOES BELOW THIS COMMENT  
+                x_list = [300, 100, 500]
+                y_list = [100, 400, 400]
+                w_list = [250, 200, 200]
+                h_list = [100, 100, 100]
+
+                # ALL CODE FOR BUTTON INTERACTIONS GOES BELOW THIS COMMENT  
                 mouse = pygame.mouse.get_pos()
                 click = pygame.mouse.get_pressed()
-                
-                if 300+250 > mouse[0] > 300 and 100+100 > mouse[1] > 100:
-                    play_color = constants.B_GREEN
-                    if click[0] == 1:
-                        play = True
-                        dracu.go_right()
-                else:
-                    play_color = constants.GREEN
+
+                ctr = 0
+                while ctr < 3:
+                    if x_list[ctr]+w_list[ctr] > mouse[0] > x_list[ctr] and y_list[ctr]+h_list[ctr] > mouse[1] > 100:
+                        play_color = constants.B_GREEN
+                        if click[0] == 1:
+                            if ctr == 0:
+                                play = True
+                                dracu.go_right()
+                            elif ctr == 1:
+                                # code for highscore
+                            elif ctr == 2:
+                                # code for options
+                    else:
+                        play_color = constants.GREEN
+                    ctr = ctr+1
                 # ALL CODE FOR PLAY BUTTON INTERACTION GOES ABOVE THIS COMMENT
 
             # -------- End of Prompt to Start Game -----------
