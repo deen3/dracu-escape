@@ -3,7 +3,7 @@ As per requirement in Game Development
 DEVELOPER - DINA M. FAJARDO
 fajardod91@yahoo.com.ph
 """
- 
+from tkinter import * 
 import pygame
 import time
  
@@ -11,7 +11,8 @@ import constants
 import levels
  
 from dracu import Dracu
-
+from highscore import Highscore
+        
 def display_text(color, text, font_size, x, y, w, h):
     pygame.font.init()
     
@@ -197,9 +198,11 @@ def main():
                                 play = True
                                 dracu.go_right()
                             elif ctr == 1:
-                                # code for highscore
+                                root = Tk()
+                                #creation of an instance
+                                app = Highscore(root)
                             elif ctr == 2:
-                                # code for options
+                                options()
                     else:
                         play_color = constants.GREEN
                     ctr = ctr+1
@@ -227,6 +230,7 @@ def main():
      
         # Updating the screen...
         pygame.display.flip()
+
  
 if __name__ == "__main__":
     main()
