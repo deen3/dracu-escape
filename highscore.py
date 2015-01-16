@@ -4,6 +4,7 @@ This module is for displaying highcores.
 import sqlite3
 from tkinter import *
 from PIL import Image, ImageTk
+from itertools import chain
 
 class Highscore(Frame):
 
@@ -41,6 +42,16 @@ class Highscore(Frame):
         self.lb = Listbox(self, bd=0, activestyle="dotbox", bg="gray", height=15, width=20, font=("Agency FB", 16))
         #self.lb.bind('<Double-Button-1>',self.lbSelected)
         self.lb.place(x=45, y=180)
+
+        # put values in lb from db
+        conn = sqlite3.connect("dracuDb.s3db")
+        cur = conn.execute("SELECT * FROM dracuTbl ORDER BY dracuDb_score")
+        try:
+            first_row = next(cur)
+            for row in chain((first_row,),cur):
+                self.lb.insert(END, str(row[1])+" --- "+str(row[2]))
+        except StopIteration as e:
+            self.lb.insert(END,"Empty Record")
 
 root = Tk()
 root.geometry("800x600")
