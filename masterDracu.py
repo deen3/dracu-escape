@@ -6,12 +6,13 @@ fajardod91@yahoo.com.ph
 from tkinter import * 
 import pygame
 import time
- 
+
+#import highscore
 import constants
 import levels
  
 from dracu import Dracu
-from highscore import Highscore
+
         
 def display_text(color, text, font_size, x, y, w, h):
     pygame.font.init()
@@ -197,12 +198,12 @@ def main():
                             if ctr == 0:
                                 play = True
                                 dracu.go_right()
-                            elif ctr == 1:
-                                root = Tk()
-                                #creation of an instance
-                                app = Highscore(root)
-                            elif ctr == 2:
-                                options()
+##                            elif ctr == 1:
+##                                root = Tk()
+##                                #creation of an instance
+##                                app = Highscore(root)
+##                            elif ctr == 2:
+##                                options()
                     else:
                         play_color = constants.GREEN
                     ctr = ctr+1
