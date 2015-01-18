@@ -151,7 +151,7 @@ class Menu(Frame):
         try:
             first_row = next(cur)
             for row in chain((first_row,),cur):
-                if row[0] == True: # if music is on
+                if str(row[0]) == "True": # if music is on
                     
                 else:
                     
