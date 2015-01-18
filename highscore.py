@@ -23,7 +23,7 @@ class Highscore(Frame):
 
         # load images to use
         icon = ImageTk.PhotoImage(Image.open("includes/img/icon.png"))
-        bg = ImageTk.PhotoImage(Image.open("includes/img/bg.jpg"))
+        bg = ImageTk.PhotoImage(Image.open("includes/img/bg.png"))
         self.btn = ImageTk.PhotoImage(Image.open("includes/img/btn.png"))
         self.btn2 = ImageTk.PhotoImage(Image.open("includes/img/btn2.png"))
         
