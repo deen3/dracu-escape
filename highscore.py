@@ -39,9 +39,9 @@ class Highscore(Frame):
         img.place(x=-2, y=-2)
 
         # display buttons
-        self.btn1 = Button(self, bd=0, bg="black", image=self.btn)
+        self.btn1 = Button(self, bd=0, bg="black", text="PLAY", image=self.btn)
         self.btn1.image = self.btn
-        self.btn1.place(x=280, y=70)
+        self.btn1.place(x=280, y=500)
         self.btn1.bind('<Enter>', self.btn1Enter)
         self.btn1.bind('<Leave>', self.btn1Leave)
 
@@ -50,6 +50,7 @@ class Highscore(Frame):
 
     def btn1Leave(self, no):
         self.btn1.configure(image = self.btn)
+        self.btn1.configure(text = "PLAY")
 
     def show_highscore(self):
         fr = Frame (self, width=50, height=45).place(x=60, y=200)
