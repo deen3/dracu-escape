@@ -139,14 +139,17 @@ class Menu(Frame):
         addy = 235
 
         conn = sqlite3.connect("dracuDb.s3db")
-        cur = conn.execute("SELECT * FROM dracuTbl ORDER BY dracuDb_score")
+        cur = conn.execute("SELECT * FROM dracuTbl ORDER BY dracuDb_score DESC")
         try:
             first_row = next(cur)
             for row in chain((first_row,),cur):
-                lbl = Label(self, bd=0, bg="lightgray", font=("Chiller", 20), text=str(ctr)+". "+str(row[1])+"\t\t---\t"+str(row[2])).place(x=225, y=addy)
+                if ctr > 5:
+                    break
+                else:
+                    lbl = Label(self, bd=0, bg="lightgray", font=("Chiller", 20), text=str(ctr)+". "+str(row[1])+"\t\t---\t"+str(row[2])).place(x=225, y=addy)
 
-                ctr = ctr + 1
-                addy = addy + 30
+                    ctr = ctr + 1
+                    addy = addy + 30
                 
         except StopIteration as e:
             lbl = Label(self, bd=0, bg="lightgray", font=("Chiller", 20), text="No scores stored in the databse.").place(x=225, y=235)
