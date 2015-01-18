@@ -68,7 +68,7 @@ class Menu(Frame):
         self.btn2.bind('<Enter>', self.btn2Enter)
         self.btn2.bind('<Leave>', self.btn2Leave)
 
-        self.btn3 = Button(self, bd=0, bg="black", image = self.btn_option)
+        self.btn3 = Button(self, bd=0, bg="black", image = self.btn_option, command=self.show_option)
         self.btn3.configure(image = self.btn_option)
         self.btn3.place(x=555, y=315)
         self.btn3.bind('<Enter>', self.btn3Enter)
@@ -105,35 +105,7 @@ class Menu(Frame):
         quit()
         
     def show_highscore(self):
-        self.init_window()
-        self.bg_img.configure(image = self.bg_sub)
-
-        score = ImageTk.PhotoImage(Image.open("includes/img/lbl-score.png"))
-        lbl = Label(self, bd=0, image=score)
-        lbl.image = score
-        lbl.place(x=300, y=155)
-
-        self.btn4 = Button(self, bd=0, bg="gray", image = self.btn_menu, command=self.show_menu)
-        self.btn4.configure(image = self.btn_menu)
-        self.btn4.place(x=300, y=400)
-        self.btn4.bind('<Enter>', self.btn4Enter)
-        self.btn4.bind('<Leave>', self.btn4Leave)
-        
-##        fr = Frame (self, width=50, height=45).place(x=60, y=200)
-##        # make a listbox
-##        self.lb = Listbox(self, bd=0, activestyle="dotbox", bg="gray", height=15, width=20, font=("Agency FB", 16))
-##        #self.lb.bind('<Double-Button-1>',self.lbSelected)
-##        self.lb.place(x=45, y=180)
-##
-##        # put values in lb from db
-##        conn = sqlite3.connect("dracuDb.s3db")
-##        cur = conn.execute("SELECT dracuDb_score FROM dracuTbl ORDER BY dracuDb_score")
-##        try:
-##            first_row = next(cur)
-##            for row in chain((first_row,),cur):
-##                self.lb.insert(END, str(row[0])+" --- "+str(row[0]))
-##        except StopIteration as e:
-##            self.lb.insert(END,"Empty Record")
+        self.show_sub_bg("score")
 
         ctr = 1
         addy = 235
@@ -153,7 +125,25 @@ class Menu(Frame):
                 
         except StopIteration as e:
             lbl = Label(self, bd=0, bg="lightgray", font=("Chiller", 20), text="No scores stored in the databse.").place(x=225, y=235)
-                
+
+    def show_option(self):
+        self.show_sub_bg("option")
+
+    def show_sub_bg(self, lbl):
+        self.init_window()
+        self.bg_img.configure(image = self.bg_sub)
+
+        img = ImageTk.PhotoImage(Image.open("includes/img/lbl-"+lbl+".png"))
+        lbl = Label(self, bd=0, image=img)
+        lbl.image = img
+        lbl.place(x=300, y=155)
+
+        self.btn4 = Button(self, bd=0, bg="gray", image = self.btn_menu, command=self.show_menu)
+        self.btn4.configure(image = self.btn_menu)
+        self.btn4.place(x=300, y=400)
+        self.btn4.bind('<Enter>', self.btn4Enter)
+        self.btn4.bind('<Leave>', self.btn4Leave)
+           
 root = Tk()
 root.geometry("800x600")
 
