@@ -138,11 +138,11 @@ class Menu(Frame):
         rd1 = ImageTk.PhotoImage(Image.open("includes/img/rd-music.png"))
         rd2 = ImageTk.PhotoImage(Image.open("includes/img/rd-sound.png"))
 
-        music = Button(self, bd=0, bg="gray", image = rd1, command=self.update_option("music"))
+        music = Button(self, bd=0, bg="gray", image = rd1, command=self.update_music)
         music.image = rd1
         music.place(x=445, y=290)
 
-        sound = Button(self, bd=0, bg="gray", image = rd2, command=self.update_option("sound"))
+        sound = Button(self, bd=0, bg="gray", image = rd2, command=self.update_sound)
         sound.image = rd2
         sound.place(x=447, y=338)
 
@@ -178,18 +178,37 @@ class Menu(Frame):
         self.btn4.bind('<Enter>', self.btn4Enter)
         self.btn4.bind('<Leave>', self.btn4Leave)
 
-    def modify_option(self, attrib):
+    def update_music(self):
         conn = sqlite3.connect("dracuDb.s3db")
-        cur = conn.execute("SELECT "+attrib+" FROM dracuOption")
+        cur = conn.execute("SELECT music FROM dracuOption")
         try:
             first_row = next(cur)
             for row in chain((first_row,),cur):
                 if row[0] == True: # if music is on
-                    conn.execute("UPDATE dracuOption set "+attrib+"=False")
+                    conn.execute("UPDATE dracuOption set music='False'")
                     conn.commit()
+                    print("True")
                 else:
-                    conn.execute("UPDATE dracuOption set "+attrib+"=True")
+                    conn.execute("UPDATE dracuOption set music='True'")
                     conn.commit()
+                    print("False")
+        except StopIteration as e:
+            lbl = Label(self, bd=0, bg="lightgray", font=("Chiller", 20), text="An error occured.").place(x=225, y=235)
+
+    def update_sound(self):
+        conn = sqlite3.connect("dracuDb.s3db")
+        cur = conn.execute("SELECT music FROM dracuOption")
+        try:
+            first_row = next(cur)
+            for row in chain((first_row,),cur):
+                if row[0] == True: # if music is on
+                    conn.execute("UPDATE dracuOption set music='False'")
+                    conn.commit()
+                    print("True")
+                else:
+                    conn.execute("UPDATE dracuOption set music='True'")
+                    conn.commit()
+                    print("False")
         except StopIteration as e:
             lbl = Label(self, bd=0, bg="lightgray", font=("Chiller", 20), text="An error occured.").place(x=225, y=235)
 
