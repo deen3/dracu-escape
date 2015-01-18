@@ -21,8 +21,8 @@ class Highscore(Frame):
     def init_window(self):
         pygame.init()
         # initialize sounds/music
-        self.hoveredSound = pygame.mixer.Sound('includes/sounds/menu-music.wav')
-        pygame.mixer.music.load('includes/sounds/menu-music.wav')
+        self.hoveredSound = pygame.mixer.Sound('includes/sound/button.wav')
+        pygame.mixer.music.load('includes/music/menu-music.wav')
         pygame.mixer.music.play(10)
         
         # changing the title of our master widget      
