@@ -15,7 +15,7 @@ class Highscore(Frame):
         self.master = master
  
         self.init_window()
-        self.show_highscore()
+        #self.show_highscore()
  
     def init_window(self):
         # changing the title of our master widget      
@@ -24,8 +24,9 @@ class Highscore(Frame):
         # load images to use
         icon = ImageTk.PhotoImage(Image.open("includes/img/icon.png"))
         bg = ImageTk.PhotoImage(Image.open("includes/img/bg.png"))
-        self.btn = ImageTk.PhotoImage(Image.open("includes/img/btn.png"))
-        self.btn2 = ImageTk.PhotoImage(Image.open("includes/img/btn2.png"))
+        self.btn_play = ImageTk.PhotoImage(Image.open("includes/img/btn-play.png"))
+        self.btn_score = ImageTk.PhotoImage(Image.open("includes/img/btn-score.png"))
+        self.btn_option= ImageTk.PhotoImage(Image.open("includes/img/btn-option.png"))
         
         # setting the icon
         self.tk.call('wm', 'iconphoto', root._w, icon)
@@ -39,18 +40,16 @@ class Highscore(Frame):
         img.place(x=-2, y=-2)
 
         # display buttons
-        self.btn1 = Button(self, bd=0, bg="black", text="PLAY", image=self.btn)
-        self.btn1.image = self.btn
-        self.btn1.place(x=280, y=500)
+        self.btn1 = Button(self, bd=0, bg=None, text="PLAY")
+        self.btn1.place(x=545, y=145)
         self.btn1.bind('<Enter>', self.btn1Enter)
         self.btn1.bind('<Leave>', self.btn1Leave)
 
     def btn1Enter(self, event):
-        self.btn1.configure(image = self.btn2)
+        self.btn1.configure(image = self.btn_play)
 
     def btn1Leave(self, no):
-        self.btn1.configure(image = self.btn)
-        self.btn1.configure(text = "PLAY")
+        self.btn1.configure(image = None)
 
     def show_highscore(self):
         fr = Frame (self, width=50, height=45).place(x=60, y=200)
