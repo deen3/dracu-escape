@@ -6,6 +6,8 @@ from tkinter import *
 from PIL import Image, ImageTk
 from itertools import chain
 
+import pygame
+
 class Highscore(Frame):
 
     def __init__(self, master=None):
@@ -15,6 +17,7 @@ class Highscore(Frame):
         self.master = master
  
         self.init_window()
+        self.show_menu()
         #self.show_highscore()
  
     def init_window(self):
@@ -45,11 +48,26 @@ class Highscore(Frame):
         self.btn1.bind('<Enter>', self.btn1Enter)
         self.btn1.bind('<Leave>', self.btn1Leave)
 
+        self.menu = True
+
     def btn1Enter(self, event):
         self.btn1.configure(image = self.btn_play)
 
     def btn1Leave(self, no):
         self.btn1.configure(image = None)
+
+    def show_menu(self):
+        while self.menu:
+            mouse = pygame.mouse.get_pos()
+            click = pygame.mouse.get_pressed()
+            
+            #x+w x y_h y
+            if 545+200 > mouse[0] > 545 and 145+100 > mouse[1] > 145:
+                play_color = constants.B_GREEN
+                if click[0] == 1:
+                    main()
+                else:
+                    play_color = constants.GREEN
 
     def show_highscore(self):
         fr = Frame (self, width=50, height=45).place(x=60, y=200)

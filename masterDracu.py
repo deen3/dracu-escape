@@ -119,7 +119,7 @@ def main():
 
             mouse = pygame.mouse.get_pos()
             click = pygame.mouse.get_pressed()
-
+            
             if 100+200 > mouse[0] > 100 and 400+100 > mouse[1] > 400:
                 play_color = constants.B_GREEN
                 if click[0] == 1:
