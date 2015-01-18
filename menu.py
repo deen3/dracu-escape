@@ -111,7 +111,7 @@ class Menu(Frame):
         addy = 235
 
         conn = sqlite3.connect("dracuDb.s3db")
-        cur = conn.execute("SELECT * FROM dracuTbl ORDER BY dracuDb_score DESC")
+        cur = conn.execute("SELECT * FROM dracuScore ORDER BY dracuDb_score DESC")
         try:
             first_row = next(cur)
             for row in chain((first_row,),cur):
@@ -124,10 +124,44 @@ class Menu(Frame):
                     addy = addy + 30
                 
         except StopIteration as e:
-            lbl = Label(self, bd=0, bg="lightgray", font=("Chiller", 20), text="No scores stored in the databse.").place(x=225, y=235)
+            lbl = Label(self, bd=0, bg="lightgray", font=("Chiller", 20), text="No scores stored in the database.").place(x=225, y=235)
 
     def show_option(self):
         self.show_sub_bg("option")
+
+        img = ImageTk.PhotoImage(Image.open("includes/img/bg-options.png"))
+        lbl = Label(self, bd=0, image=img)
+        lbl.image = img
+        lbl.place(x=290, y=280)
+
+        # load images to use
+        rd1 = ImageTk.PhotoImage(Image.open("includes/img/rd-music.png"))
+        rd2 = ImageTk.PhotoImage(Image.open("includes/img/rd-sound.png"))
+
+        music = Button(self, bd=0, bg="gray", image = rd1, command=self.update_option("music"))
+        music.image = rd1
+        music.place(x=445, y=290)
+
+        sound = Button(self, bd=0, bg="gray", image = rd2, command=self.update_option("sound"))
+        sound.image = rd2
+        sound.place(x=447, y=338)
+
+##        conn = sqlite3.connect("dracuDb.s3db")
+##        cur = conn.execute("SELECT * FROM dracuOption ORDER BY dracuDb_score DESC")
+##        try:
+##            first_row = next(cur)
+##            for row in chain((first_row,),cur):
+##                if row[0] == True: # if music is on
+##                    
+##                else:
+##                    
+##                if row[1] == True: # if sound is on
+##
+##                else:
+##                
+##        except StopIteration as e:
+##            lbl = Label(self, bd=0, bg="lightgray", font=("Chiller", 20), text="An error occured.").place(x=225, y=235)
+
 
     def show_sub_bg(self, lbl):
         self.init_window()
@@ -143,6 +177,22 @@ class Menu(Frame):
         self.btn4.place(x=300, y=400)
         self.btn4.bind('<Enter>', self.btn4Enter)
         self.btn4.bind('<Leave>', self.btn4Leave)
+
+    def modify_option(self, attrib):
+        conn = sqlite3.connect("dracuDb.s3db")
+        cur = conn.execute("SELECT "+attrib+" FROM dracuOption")
+        try:
+            first_row = next(cur)
+            for row in chain((first_row,),cur):
+                if row[0] == True: # if music is on
+                    conn.execute("UPDATE dracuOption set "+attrib+"=False")
+                    conn.commit()
+                else:
+                    conn.execute("UPDATE dracuOption set "+attrib+"=True")
+                    conn.commit()
+        except StopIteration as e:
+            lbl = Label(self, bd=0, bg="lightgray", font=("Chiller", 20), text="An error occured.").place(x=225, y=235)
+
            
 root = Tk()
 root.geometry("800x600")
