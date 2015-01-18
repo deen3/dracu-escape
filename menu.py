@@ -201,14 +201,13 @@ class Menu(Frame):
         try:
             first_row = next(cur)
             for row in chain((first_row,),cur):
-                if row[0] == True: # if music is on
+                print(row[0])
+                if row[0] == "True": # if music is on
                     conn.execute("UPDATE dracuOption set music='False'")
                     conn.commit()
-                    print("True")
                 else:
                     conn.execute("UPDATE dracuOption set music='True'")
                     conn.commit()
-                    print("False")
         except StopIteration as e:
             lbl = Label(self, bd=0, bg="lightgray", font=("Chiller", 20), text="An error occured.").place(x=225, y=235)
 
