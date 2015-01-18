@@ -146,21 +146,21 @@ class Menu(Frame):
         sound.image = rd2
         sound.place(x=447, y=338)
 
-##        conn = sqlite3.connect("dracuDb.s3db")
-##        cur = conn.execute("SELECT * FROM dracuOption ORDER BY dracuDb_score DESC")
-##        try:
-##            first_row = next(cur)
-##            for row in chain((first_row,),cur):
-##                if row[0] == True: # if music is on
-##                    
-##                else:
-##                    
-##                if row[1] == True: # if sound is on
-##
-##                else:
-##                
-##        except StopIteration as e:
-##            lbl = Label(self, bd=0, bg="lightgray", font=("Chiller", 20), text="An error occured.").place(x=225, y=235)
+        conn = sqlite3.connect("dracuDb.s3db")
+        cur = conn.execute("SELECT * FROM dracuOption ORDER BY dracuDb_score DESC")
+        try:
+            first_row = next(cur)
+            for row in chain((first_row,),cur):
+                if row[0] == True: # if music is on
+                    
+                else:
+                    
+                if row[1] == True: # if sound is on
+
+                else:
+                
+        except StopIteration as e:
+            lbl = Label(self, bd=0, bg="lightgray", font=("Chiller", 20), text="An error occured.").place(x=225, y=235)
 
 
     def show_sub_bg(self, lbl):
@@ -184,33 +184,33 @@ class Menu(Frame):
         try:
             first_row = next(cur)
             for row in chain((first_row,),cur):
-                if row[0] == True: # if music is on
+                print(str(row[0]))
+                if str(row[0]) == "True": # if music is on
                     conn.execute("UPDATE dracuOption set music='False'")
                     conn.commit()
-                    print("True")
                 else:
                     conn.execute("UPDATE dracuOption set music='True'")
                     conn.commit()
-                    print("False")
         except StopIteration as e:
             lbl = Label(self, bd=0, bg="lightgray", font=("Chiller", 20), text="An error occured.").place(x=225, y=235)
-
+        self.show_option()
+        
     def update_sound(self):
         conn = sqlite3.connect("dracuDb.s3db")
-        cur = conn.execute("SELECT music FROM dracuOption")
+        cur = conn.execute("SELECT sound FROM dracuOption")
         try:
             first_row = next(cur)
             for row in chain((first_row,),cur):
-                print(row[0])
-                if row[0] == "True": # if music is on
-                    conn.execute("UPDATE dracuOption set music='False'")
+                print(str(row[0]))
+                if str(row[0]) == "True": # if music is on
+                    conn.execute("UPDATE dracuOption set sound='False'")
                     conn.commit()
                 else:
-                    conn.execute("UPDATE dracuOption set music='True'")
+                    conn.execute("UPDATE dracuOption set sound='True'")
                     conn.commit()
         except StopIteration as e:
             lbl = Label(self, bd=0, bg="lightgray", font=("Chiller", 20), text="An error occured.").place(x=225, y=235)
-
+        self.show_option()
            
 root = Tk()
 root.geometry("800x600")
