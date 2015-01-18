@@ -69,8 +69,8 @@ def main():
     quit_color = constants.RED
 
     # initialize sounds/music
-    burningSound = pygame.mixer.Sound('includes/sounds/Over.wav')
-    pygame.mixer.music.load('includes/sounds/GameMusic.wav')
+    burningSound = pygame.mixer.Sound('includes/sound/Over.wav')
+    pygame.mixer.music.load('includes/music/dracu-level1.wav')
     
     # Used to manage how fast the screen updates
     clock = pygame.time.Clock()
