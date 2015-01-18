@@ -1,6 +1,7 @@
 """
 This module is for displaying highcores.
 """
+import pygame
 import sqlite3
 from tkinter import *
 from PIL import Image, ImageTk
@@ -18,6 +19,12 @@ class Highscore(Frame):
         #self.show_highscore()
  
     def init_window(self):
+        pygame.init()
+        # initialize sounds/music
+        self.hoveredSound = pygame.mixer.Sound('includes/sounds/menu-music.wav')
+        pygame.mixer.music.load('includes/sounds/menu-music.wav')
+        pygame.mixer.music.play(10)
+        
         # changing the title of our master widget      
         self.master.title("DRACU-ESCAPE")
 
@@ -51,22 +58,25 @@ class Highscore(Frame):
 
         self.btn2 = Button(self, bd=0, bg="black", image = self.btn_score)
         self.btn2.configure(image = self.btn_score)
-        self.btn2.place(x=555, y=200)
+        self.btn2.place(x=555, y=235)
         self.btn2.bind('<Enter>', self.btn2Enter)
         self.btn2.bind('<Leave>', self.btn2Leave)
 
         self.btn3 = Button(self, bd=0, bg="black", image = self.btn_option)
         self.btn3.configure(image = self.btn_option)
-        self.btn3.place(x=555, y=400)
+        self.btn3.place(x=555, y=315)
         self.btn3.bind('<Enter>', self.btn3Enter)
         self.btn3.bind('<Leave>', self.btn3Leave)
 
     def btn1Enter(self, event):
         self.btn1.configure(image = self.btn_playH)
+        self.hoveredSound.play()
     def btn2Enter(self, event):
         self.btn2.configure(image = self.btn_scoreH)
+        self.hoveredSound.play()
     def btn3Enter(self, event):
         self.btn3.configure(image = self.btn_optionH)
+        self.hoveredSound.play()
 
     def btn1Leave(self, no):
         self.btn1.configure(image = self.btn_play)
