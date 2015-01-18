@@ -135,20 +135,22 @@ class Menu(Frame):
 ##        except StopIteration as e:
 ##            self.lb.insert(END,"Empty Record")
 
+        ctr = 1
+        addy = 235
+
         conn = sqlite3.connect("dracuDb.s3db")
         cur = conn.execute("SELECT * FROM dracuTbl ORDER BY dracuDb_score")
         try:
             first_row = next(cur)
             for row in chain((first_row,),cur):
-                lbl = Label(self, bd=0, bg="lightgray", font=("Chiller", 20), text=str(row[1])+"\t---\t"+str(row[2])).place(x=270, y=230)
-        
+                lbl = Label(self, bd=0, bg="lightgray", font=("Chiller", 20), text=str(ctr)+". "+str(row[1])+"\t\t---\t"+str(row[2])).place(x=225, y=addy)
+
+                ctr = ctr + 1
+                addy = addy + 30
+                
         except StopIteration as e:
-            lbl = Label(self, bd=0, bg="lightgray", font=("Chiller", 20), text="No scores stored in the databse.").place(x=270, y=230)
-        
-##        lbl = Label(self, bd=0, bg="lightgray", font=("Chiller", 20), text="1. \n2. \n3. \n4. \n5. ").place(x=270, y=230)
-##        lbl = Label(self, bd=0, bg="lightgray", font=("Chiller", 20), text="Dina\nDevy\nDevinson\nKienah\nFhianne").place(x=300, y=230)
-##        lbl = Label(self, bd=0, bg="lightgray", font=("Chiller", 20), text="1. \n2. \n3. \n4. \n5. ").place(x=450, y=230)
-##        
+            lbl = Label(self, bd=0, bg="lightgray", font=("Chiller", 20), text="No scores stored in the databse.").place(x=225, y=235)
+                
 root = Tk()
 root.geometry("800x600")
 
