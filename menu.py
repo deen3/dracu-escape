@@ -19,13 +19,31 @@ class Menu(Frame):
  
         self.init_window()
         self.show_buttons()
+        
+    def music_sound_toggle(self):
+        pygame.mixer.music.load('includes/music/menu-music.wav')
 
+        conn = sqlite3.connect("dracuDb.s3db")
+        cur = conn.execute("SELECT * FROM dracuOption")
+        first_row = next(cur)
+        for row in chain((first_row,),cur):
+            # if music is on
+            if str(row[0]) == "ON": 
+                pygame.mixer.music.play(10)
+            else:
+                pygame.mixer.music.stop()
+
+            # if sound is on
+            if str(row[1]) == "ON": 
+                self.sound = "ON"
+            else:
+                self.sound = "OFF"
+                
     def init_window(self):
         pygame.init()
         # initialize sounds/music
         self.hoveredSound = pygame.mixer.Sound('includes/sound/button.wav')
-        pygame.mixer.music.load('includes/music/menu-music.wav')
-        pygame.mixer.music.play(10)
+        self.music_sound_toggle()
         
         # changing the title of our master widget      
         self.master.title("DRACU-ESCAPE")
@@ -74,18 +92,22 @@ class Menu(Frame):
         self.btn3.bind('<Enter>', self.btn3Enter)
         self.btn3.bind('<Leave>', self.btn3Leave)
 
+    def sound_effect(self):
+        if self.sound == "ON":
+            self.hoveredSound.play()
+
     def btn1Enter(self, event):
         self.btn1.configure(image = self.btn_playH)
-        self.hoveredSound.play()
+        self.sound_effect()
     def btn2Enter(self, event):
         self.btn2.configure(image = self.btn_scoreH)
-        self.hoveredSound.play()
+        self.sound_effect()
     def btn3Enter(self, event):
         self.btn3.configure(image = self.btn_optionH)
-        self.hoveredSound.play()
+        self.sound_effect()
     def btn4Enter(self, event):
         self.btn4.configure(image = self.btn_menuH)
-        self.hoveredSound.play()
+        self.sound_effect()
 
     def btn1Leave(self, no):
         self.btn1.configure(image = self.btn_play)
