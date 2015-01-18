@@ -7,7 +7,9 @@ from tkinter import *
 from PIL import Image, ImageTk
 from itertools import chain
 
-class Highscore(Frame):
+import masterDracu
+
+class Menu(Frame):
 
     def __init__(self, master=None):
         Frame.__init__(self, master)   
@@ -17,7 +19,7 @@ class Highscore(Frame):
  
         self.init_window()
         #self.show_highscore()
- 
+
     def init_window(self):
         pygame.init()
         # initialize sounds/music
@@ -30,7 +32,7 @@ class Highscore(Frame):
 
         # load images to use
         icon = ImageTk.PhotoImage(Image.open("includes/img/icon.png"))
-        bg = ImageTk.PhotoImage(Image.open("includes/img/bg.png"))
+        self.bg = ImageTk.PhotoImage(Image.open("includes/img/bg.png"))
         self.btn_play = ImageTk.PhotoImage(Image.open("includes/img/btn-play.png"))
         self.btn_playH = ImageTk.PhotoImage(Image.open("includes/img/btn-playH.png"))
         self.btn_score = ImageTk.PhotoImage(Image.open("includes/img/btn-score.png"))
@@ -45,12 +47,12 @@ class Highscore(Frame):
         self.pack(fill=BOTH, expand=1)
 
         # display background
-        img = Label(self, image=bg)
-        img.image = bg
+        img = Label(self, image=self.bg)
+        img.image = self.bg
         img.place(x=-2, y=-2)
 
         # display buttons
-        self.btn1 = Button(self, bd=0, bg="black", image = self.btn_play)
+        self.btn1 = Button(self, bd=0, bg="black", image = self.btn_play, command=self.show_play)
         self.btn1.configure(image = self.btn_play)
         self.btn1.place(x=555, y=150)
         self.btn1.bind('<Enter>', self.btn1Enter)
@@ -85,6 +87,10 @@ class Highscore(Frame):
     def btn3Leave(self, no):
         self.btn3.configure(image = self.btn_option)
 
+    def show_play(self):
+        masterDracu.main()
+        quit()
+        
     def show_highscore(self):
         fr = Frame (self, width=50, height=45).place(x=60, y=200)
         # make a listbox
@@ -106,7 +112,7 @@ root = Tk()
 root.geometry("800x600")
 
 #creation of an instance
-app = Highscore(root)
+app = Menu(root)
 
 #mainloop 
 root.mainloop()

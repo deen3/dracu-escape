@@ -104,7 +104,7 @@ class Dracu(pygame.sprite.Sprite):
     def jump(self):
         """ Called when user hits 'jump' button. """
         # play sound effect
-        pygame.mixer.Sound('includes/sounds/Jump.wav').play()
+        pygame.mixer.Sound('includes/sound/jump.wav').play()
  
         # move down a bit and see if there is a platform below us.
         self.rect.y += 1

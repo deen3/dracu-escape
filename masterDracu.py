@@ -3,11 +3,9 @@ As per requirement in Game Development
 DEVELOPER - DINA M. FAJARDO
 fajardod91@yahoo.com.ph
 """
-from tkinter import * 
 import pygame
 import time
 
-#import highscore
 import constants
 import levels
  
