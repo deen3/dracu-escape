@@ -5,6 +5,7 @@ fajardod91@yahoo.com.ph
 """
 import pygame
 import time
+import sqlite3
 
 import constants
 import levels
@@ -93,7 +94,8 @@ def main():
             if dracu.hit_flag == True:
                 #stop background music
                 pygame.mixer.music.stop()
-                # play sound effect dracu burning
+                # play sound effect dracu burning if sound is ON
+                
                 burningSound.play()
 
                 dracu.update()
