@@ -2,9 +2,11 @@
 This module is for Dracu's moving customes
 """
 import pygame
- 
+import sqlite3
+
 import constants
- 
+
+from itertools import chain
 from spritesheet_functions import SpriteSheet
  
 class Dracu(pygame.sprite.Sprite):
@@ -104,8 +106,14 @@ class Dracu(pygame.sprite.Sprite):
     def jump(self):
         """ Called when user hits 'jump' button. """
         # play sound effect
-        pygame.mixer.Sound('includes/sound/jump.wav').play()
- 
+        conn = sqlite3.connect("dracuDb.s3db")
+        cur = conn.execute("SELECT * FROM dracuOption")
+        first_row = next(cur)
+        for row in chain((first_row,),cur):
+            # if music is on
+            if str(row[1]) == "ON": 
+                pygame.mixer.Sound('includes/sound/jump.wav').play()
+            
         # move down a bit and see if there is a platform below us.
         self.rect.y += 1
         platform_hit_list = pygame.sprite.spritecollide(self, self.level.fire_list, False)

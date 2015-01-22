@@ -9,7 +9,8 @@ import sqlite3
 
 import constants
 import levels
- 
+
+from itertools import chain
 from dracu import Dracu
 
         
@@ -100,7 +101,7 @@ def main():
                 first_row = next(cur)
                 for row in chain((first_row,),cur):
                     # if music is on
-                    if str(row[0]) == "ON": 
+                    if str(row[1]) == "ON": 
                         burningSound.play()
                         
                 dracu.update()
@@ -217,8 +218,14 @@ def main():
             # -------- End of Prompt to Start Game -----------
              
             if music and play:
-                pygame.mixer.music.play(10)
-                music = False
+                conn = sqlite3.connect("dracuDb.s3db")
+                cur = conn.execute("SELECT * FROM dracuOption")
+                first_row = next(cur)
+                for row in chain((first_row,),cur):
+                    # if music is on
+                    if str(row[0]) == "ON": 
+                        pygame.mixer.music.play(10)
+                        music = False
                 
         textSurface, textRect = display_text(constants.WHITE,"Score: "+str(score), 20, 550, 550, 150, 50,)
         screen.blit(textSurface, textRect)
