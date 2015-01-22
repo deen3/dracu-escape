@@ -95,9 +95,14 @@ def main():
                 #stop background music
                 pygame.mixer.music.stop()
                 # play sound effect dracu burning if sound is ON
-                
-                burningSound.play()
-
+                conn = sqlite3.connect("dracuDb.s3db")
+                cur = conn.execute("SELECT * FROM dracuOption")
+                first_row = next(cur)
+                for row in chain((first_row,),cur):
+                    # if music is on
+                    if str(row[0]) == "ON": 
+                        burningSound.play()
+                        
                 dracu.update()
                 
                 menu = True
