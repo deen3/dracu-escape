@@ -234,6 +234,7 @@ class Menu(Frame):
            
 root = Tk()
 root.geometry("800x600")
+root.resizable(0,0)
 
 #creation of an instance
 app = Menu(root)
