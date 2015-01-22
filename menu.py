@@ -124,7 +124,7 @@ class Menu(Frame):
 
     def show_play(self):
         masterDracu.main()
-        quit()
+        self.master.withdraw()
         
     def show_highscore(self):
         self.show_sub_bg("score")
