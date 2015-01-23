@@ -1,13 +1,16 @@
+
 """
-This module is for displaying highcores.
+As a requirement in Game Development
+DEVELOPER - DINA M. FAJARDO
+fajardod91@yahoo.com.ph
 """
 import pygame
 import sqlite3
+import masterDracu
+
 from tkinter import *
 from PIL import Image, ImageTk
 from itertools import chain
-
-import masterDracu
 
 class Menu(Frame):
 
