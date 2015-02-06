@@ -1,5 +1,5 @@
 """
-This module is for Dracu's moving customes
+This module is for Dracu's moving costumes
 """
 import pygame
 import sqlite3
@@ -21,6 +21,7 @@ class Dracu(pygame.sprite.Sprite):
  
     # This holds all the images of running dracu
     running_dracu = []
+    jumping_dracu = false
  
     # List of sprites we can bump against
     level = None
