@@ -206,12 +206,6 @@ def main():
                             if ctr == 0:
                                 play = True
                                 dracu.go_right()
-##                            elif ctr == 1:
-##                                root = Tk()
-##                                #creation of an instance
-##                                app = Highscore(root)
-##                            elif ctr == 2:
-##                                options()
                     else:
                         play_color = constants.GREEN
                     ctr = ctr+1
