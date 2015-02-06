@@ -35,7 +35,8 @@ def main():
 
     # load images to use
     icon = pygame.image.load("includes/img/icon.png")
-    logo= pygame.image.load("includes/img/dracu-logo.png")
+    logo = pygame.image.load("includes/img/dracu-logo.png")
+    menu = pygame.image.load("includes/img/back-to-menu.png") 
  
     pygame.display.set_caption("DRACU-ESCAPE")
     pygame.display.set_icon(icon)
@@ -181,10 +182,8 @@ def main():
                 textSurface, textRect = display_text(play_color, "PLAY", 100, 300, 100, 250, 100)
                 screen.blit(textSurface, textRect)
 
-                pygame.draw.rect(screen, constants.BLACK, (100, 420, 200, 50))
-                textSurface, textRect = display_text(quit_color, "Back to Menu", 30, 100, 400, 200, 100)
-                screen.blit(textSurface, textRect)
-
+                #pygame.draw.rect(screen, constants.BLACK, (100, 420, 200, 50))
+                
                 score = 0
 
                 x_list = [300, 100, 500]
