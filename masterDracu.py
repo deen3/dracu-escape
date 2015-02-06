@@ -116,7 +116,6 @@ def main():
                 
         # -------- Menu -----------            
         if menu:
-            # ALL CODE FOR MENU GOES BELOW THIS COMMENT
             score = score
             textSurface, textRect = display_text(constants.B_GREEN, notif, 100, 300, 100, 250, 100)
             screen.blit(textSurface, textRect)
@@ -181,7 +180,7 @@ def main():
             # -------- Prompt to Start Game -----------  
             if not play:
                 # display interactive buttons // display_text(color, text, font_size, x, y, w, h):
-                textSurface, textRect = display_text(play_color, "PLAY", 100, 300, 100, 250, 100)
+                textSurface, textRect = display_text(play_color, "", 100, 300, 100, 250, 100)
                 screen.blit(textSurface, textRect)
 
                 #pygame.draw.rect(screen, constants.GREEN, (580, 550, 200, 50))
