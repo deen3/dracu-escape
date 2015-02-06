@@ -36,7 +36,9 @@ def main():
     # load images to use
     icon = pygame.image.load("includes/img/icon.png")
     logo = pygame.image.load("includes/img/dracu-logo.png")
-    menu = pygame.image.load("includes/img/back-to-menu.png") 
+    btm = pygame.image.load("includes/img/back-to-menu.png")
+    btmH = pygame.image.load("includes/img/back-to-menuH.png")
+    back_to_menu = btm # set btn as the initial image of menu button
  
     pygame.display.set_caption("DRACU-ESCAPE")
     pygame.display.set_icon(icon)
@@ -182,30 +184,29 @@ def main():
                 textSurface, textRect = display_text(play_color, "PLAY", 100, 300, 100, 250, 100)
                 screen.blit(textSurface, textRect)
 
-                #pygame.draw.rect(screen, constants.BLACK, (100, 420, 200, 50))
+                #pygame.draw.rect(screen, constants.GREEN, (580, 550, 200, 50))
                 
                 score = 0
-
-                x_list = [300, 100, 500]
-                y_list = [100, 400, 400]
-                w_list = [250, 200, 200]
-                h_list = [100, 100, 100]
 
                 # ALL CODE FOR BUTTON INTERACTIONS GOES BELOW THIS COMMENT  
                 mouse = pygame.mouse.get_pos()
                 click = pygame.mouse.get_pressed()
+                
+                # if mouse hovered the play button
+                if 300+250 > mouse[0] > 300 and 100+100 > mouse[1] > 100:
+                    play_color = constants.B_GREEN
+                    if click[0] == 1:
+                        play = True
+                        dracu.go_right()
+                else:
+                    play_color = constants.GREEN
 
-                ctr = 0
-                while ctr < 3:
-                    if x_list[ctr]+w_list[ctr] > mouse[0] > x_list[ctr] and y_list[ctr]+h_list[ctr] > mouse[1] > 100:
-                        play_color = constants.B_GREEN
-                        if click[0] == 1:
-                            if ctr == 0:
-                                play = True
-                                dracu.go_right()
-                    else:
-                        play_color = constants.GREEN
-                    ctr = ctr+1
+                # if mouse hovered the back to menu button
+                if 580+188 > mouse[0] > 580 and 550+42 > mouse[1] > 550:
+                    back_to_menu = btmH # changed the back to menu button to hovered button
+                else:
+                    back_to_menu = btm
+                    
                 # ALL CODE FOR PLAY BUTTON INTERACTION GOES ABOVE THIS COMMENT
 
             # -------- End of Prompt to Start Game -----------
@@ -220,10 +221,11 @@ def main():
                         pygame.mixer.music.play(10)
                         music = False
                 
-        textSurface, textRect = display_text(constants.WHITE,"Score: "+str(score), 20, 550, 550, 150, 50,)
+        textSurface, textRect = display_text(constants.WHITE,"Score: "+str(score), 20,600,0,150,50,)
         screen.blit(textSurface, textRect)
 
         screen.blit(logo,(5,545))
+        screen.blit(back_to_menu,(580,550))
 
         # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
 
