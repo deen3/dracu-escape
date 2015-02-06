@@ -36,9 +36,14 @@ def main():
     # load images to use
     icon = pygame.image.load("includes/img/icon.png")
     logo = pygame.image.load("includes/img/dracu-logo.png")
-    btm = pygame.image.load("includes/img/back-to-menu.png")
-    btmH = pygame.image.load("includes/img/back-to-menuH.png")
-    back_to_menu = btm # set btn as the initial image of menu button
+    p = pygame.image.load("includes/img/play.png")
+    pH = pygame.image.load("includes/img/playH.png")
+    m = pygame.image.load("includes/img/back-to-menu.png")
+    mH = pygame.image.load("includes/img/back-to-menuH.png")
+
+    # set the initial image of the buttons
+    btn_play = p
+    btn_menu = m 
  
     pygame.display.set_caption("DRACU-ESCAPE")
     pygame.display.set_icon(icon)
@@ -202,9 +207,9 @@ def main():
 
                 # if mouse hovered the back to menu button
                 if 580+188 > mouse[0] > 580 and 550+42 > mouse[1] > 550:
-                    back_to_menu = btmH # changed the back to menu button to hovered button
+                    btn_menu = btmH # changed the back to menu button to hovered button
                 else:
-                    back_to_menu = btm
+                    btn_menu = btm
                     
                 # ALL CODE FOR PLAY BUTTON INTERACTION GOES ABOVE THIS COMMENT
 
@@ -224,7 +229,8 @@ def main():
         screen.blit(textSurface, textRect)
 
         screen.blit(logo,(5,545))
-        screen.blit(back_to_menu,(580,550))
+        screen.blit(btn_play,(248, 136))
+        screen.blit(btn_menu,(580,550))
 
         # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
 
