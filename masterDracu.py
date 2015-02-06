@@ -47,6 +47,14 @@ def main():
  
     pygame.display.set_caption("DRACU-ESCAPE")
     pygame.display.set_icon(icon)
+
+    # play music if ON
+    conn = sqlite3.connect("dracuDb.s3db")
+    cur = conn.execute("SELECT * FROM dracuOption")
+    first_row = next(cur)
+    for row in chain((first_row,),cur):
+        if str(row[0]) == "ON": 
+            pygame.mixer.music.play(10)
     
     # Create the player
     dracu = Dracu()
@@ -86,11 +94,31 @@ def main():
     clock = pygame.time.Clock()
 
     notif= "GAME OVER"
-    music = True
     score = 0
  
     # -------- Main Program Loop -----------
     while not done or not over:
+        # -------- Prompt to Start Game -----------  
+        if not play:
+            mouse = pygame.mouse.get_pos()
+            click = pygame.mouse.get_pressed()
+
+            # if mouse hovered the play button
+            if 248+287 > mouse[0] > 248 and 136+169 > mouse[1] > 136:
+                btn_play = pH
+                if click[0] == 1:
+                    play = True
+                    dracu.go_right()
+            else:
+                btn_play = p
+
+            # if mouse hovered the back to menu button
+            if 580+188 > mouse[0] > 580 and 550+42 > mouse[1] > 550:
+                btn_menu = mH # changed the back to menu button to hovered button
+            else:
+                btn_menu = m
+        # -------- End of Prompt to Start Game -----------
+            
         for event in pygame.event.get(): # User did something
             if event.type == pygame.QUIT: # If user clicked close
                 done = True # Flag that we are done so we exit this loop
@@ -99,59 +127,9 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP or event.key == pygame.K_SPACE:
                     dracu.jump()
-                        
-        # if the game doesn't display menu
-        if not menu:
-            if dracu.hit_flag == True:
-                #stop background music
-                pygame.mixer.music.stop()
-                # play sound effect dracu burning if sound is ON
-                conn = sqlite3.connect("dracuDb.s3db")
-                cur = conn.execute("SELECT * FROM dracuOption")
-                first_row = next(cur)
-                for row in chain((first_row,),cur):
-                    # if music is on
-                    if str(row[1]) == "ON": 
-                        burningSound.play()
-                        
-                dracu.update()
-                
-                menu = True
-                over = True
-                
-        # -------- Menu -----------            
-        if menu:
-            score = score
-            textSurface, textRect = display_text(constants.B_GREEN, notif, 100, 300, 100, 250, 100)
-            screen.blit(textSurface, textRect)
-            textSurface, textRect = display_text(constants.WHITE, str(score), 50, 350, 200, 250, 100)
-            screen.blit(textSurface, textRect)
 
-            textSurface, textRect = display_text(play_color, "Play Again", 50, 100, 400, 200, 100)
-            screen.blit(textSurface, textRect)
-            textSurface, textRect = display_text(quit_color, "Quit", 50, 500, 400, 200, 100)
-            screen.blit(textSurface, textRect)
-
-            mouse = pygame.mouse.get_pos()
-            click = pygame.mouse.get_pressed()
-            
-            if 100+200 > mouse[0] > 100 and 400+100 > mouse[1] > 400:
-                play_color = constants.B_GREEN
-                if click[0] == 1:
-                    main()
-                else:
-                    play_color = constants.GREEN
-                    
-            if 500+200 > mouse[0] > 500 and 400+100 > mouse[1] > 400:
-                quit_color = constants.B_RED
-                if click[0] == 1:
-                    pygame.quit()
-                    break
-                else:
-                    quit_color = constants.RED
-        # -------- End of Menu -----------  
-
-        if not over:
+        # -------- BELOW Game Playing... -----------                 
+        if play:
             # Update the player.
             active_sprite_list.update()
  
@@ -177,61 +155,36 @@ def main():
                     notif = "YOU WIN!"
                     # play sound effect
                     pygame.mixer.Sound('includes/sounds/Win.wav').play()
- 
-            # ALL CODE TO DRAW SHOULD GO BELOW THIS COMMENT
-            current_level.draw(screen)
-            active_sprite_list.draw(screen)
 
-            # -------- Prompt to Start Game -----------  
-            if not play:
-                # display interactive buttons // display_text(color, text, font_size, x, y, w, h):
-                textSurface, textRect = display_text(play_color, "", 100, 300, 100, 250, 100)
-                screen.blit(textSurface, textRect)
-
-                #pygame.draw.rect(screen, constants.GREEN, (580, 550, 200, 50))
-                
-                score = 0
-
-                # ALL CODE FOR BUTTON INTERACTIONS GOES BELOW THIS COMMENT  
-                mouse = pygame.mouse.get_pos()
-                click = pygame.mouse.get_pressed()
-                
-                # if mouse hovered the play button
-                if 300+250 > mouse[0] > 300 and 100+100 > mouse[1] > 100:
-                    play_color = constants.B_GREEN
-                    if click[0] == 1:
-                        play = True
-                        dracu.go_right()
-                else:
-                    play_color = constants.GREEN
-
-                # if mouse hovered the back to menu button
-                if 580+188 > mouse[0] > 580 and 550+42 > mouse[1] > 550:
-                    btn_menu = btmH # changed the back to menu button to hovered button
-                else:
-                    btn_menu = btm
-                    
-                # ALL CODE FOR PLAY BUTTON INTERACTION GOES ABOVE THIS COMMENT
-
-            # -------- End of Prompt to Start Game -----------
-             
-            if music and play:
+            if dracu.hit_flag == True:
+                #stop background music
+                pygame.mixer.music.stop()
+                # play sound effect dracu burning if sound is ON
                 conn = sqlite3.connect("dracuDb.s3db")
                 cur = conn.execute("SELECT * FROM dracuOption")
                 first_row = next(cur)
                 for row in chain((first_row,),cur):
                     # if music is on
-                    if str(row[0]) == "ON": 
-                        pygame.mixer.music.play(10)
-                        music = False
+                    if str(row[1]) == "ON": 
+                        burningSound.play()
+                        
+                dracu.update()
+                
+                play = False
+        # -------- ABOVE Game Playing... -----------   
+ 
+        # ALL CODE TO DRAW SHOULD GO BELOW THIS COMMENT
+        current_level.draw(screen)
+        active_sprite_list.draw(screen)
                 
         textSurface, textRect = display_text(constants.WHITE,"Score: "+str(score), 20,600,0,150,50,)
         screen.blit(textSurface, textRect)
 
         screen.blit(logo,(5,545))
-        screen.blit(btn_play,(248, 136))
-        screen.blit(btn_menu,(580,550))
 
+        if not play:
+            screen.blit(btn_play,(248, 136))
+            screen.blit(btn_menu,(580,550))
         # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
 
         if not menu:
