@@ -38,6 +38,8 @@ def main():
     logo = pygame.image.load("includes/img/dracu-logo.png")
     p = pygame.image.load("includes/img/play.png")
     pH = pygame.image.load("includes/img/playH.png")
+    pA = pygame.image.load("includes/img/playA.png")
+    pAH = pygame.image.load("includes/img/playAH.png")
     m = pygame.image.load("includes/img/back-to-menu.png")
     mH = pygame.image.load("includes/img/back-to-menuH.png")
 
@@ -77,11 +79,10 @@ def main():
     active_sprite_list.add(dracu)
  
     # Loop until the user clicks the close button.
-    done = False
     play = False
-    menu = False
+    play_again = False
     over = False
-
+    
     # font color of PLAY to be interactive
     play_color = constants.GREEN
     quit_color = constants.RED
@@ -97,14 +98,14 @@ def main():
     score = 0
  
     # -------- Main Program Loop -----------
-    while not done or not over:
+    while not over:
         # -------- Prompt to Start Game -----------  
-        if not play:
+        if not play and not play_again:
             mouse = pygame.mouse.get_pos()
             click = pygame.mouse.get_pressed()
 
             # if mouse hovered the play button
-            if 248+287 > mouse[0] > 248 and 136+169 > mouse[1] > 136:
+            if 248+287 > mouse[0] > 248 and 136+150 > mouse[1] > 136:
                 btn_play = pH
                 if click[0] == 1:
                     play = True
@@ -121,9 +122,8 @@ def main():
             
         for event in pygame.event.get(): # User did something
             if event.type == pygame.QUIT: # If user clicked close
-                done = True # Flag that we are done so we exit this loop
-                over = True
-
+                over = True # Flag that we are done so we exit this loop
+                
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP or event.key == pygame.K_SPACE:
                     dracu.jump()
@@ -171,7 +171,28 @@ def main():
                 dracu.update()
                 
                 play = False
-        # -------- ABOVE Game Playing... -----------   
+                play_again = True
+        # -------- ABOVE Game Playing... -----------
+        
+        # -------- Prompt to Play Game Again -----------  
+        if play_again:
+            mouse = pygame.mouse.get_pos()
+            click = pygame.mouse.get_pressed()
+
+            # if mouse hovered the play button
+            if 248+287 > mouse[0] > 248 and 136+150 > mouse[1] > 136:
+                btn_play = pAH
+                if click[0] == 1:
+                    main()
+            else:
+                btn_play = pA
+
+            # if mouse hovered the back to menu button
+            if 580+188 > mouse[0] > 580 and 550+42 > mouse[1] > 550:
+                btn_menu = mH # changed the back to menu button to hovered button
+            else:
+                btn_menu = m
+        # -------- End of Prompt to Play Game Again -----------
  
         # ALL CODE TO DRAW SHOULD GO BELOW THIS COMMENT
         current_level.draw(screen)
@@ -187,9 +208,8 @@ def main():
             screen.blit(btn_menu,(580,550))
         # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
 
-        if not menu:
-            # scoring depends on time
-            score += 1
+        # scoring depends on time
+        score += 1
      
         # Limit to 120 frames per second
         clock.tick(480) 
