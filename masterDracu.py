@@ -24,7 +24,18 @@ def display_text(color, text, font_size, x, y, w, h):
     return textSurface, textRect
 
 def menu():
+    # load images to use
     bg = pygame.image.load("includes/img/bg.png")
+    bg_sub = pygame.image.load("includes/img/bg-sub.png")
+    btn_menu = pygame.image.load("includes/img/btn-menu.png")
+    btn_menuH = pygame.image.load("includes/img/btn-menuH.png")
+    btn_play = pygame.image.load("includes/img/btn-play.png")
+    btn_playH = pygame.image.load("includes/img/btn-playH.png")
+    btn_score = pygame.image.load("includes/img/btn-score.png")
+    btn_scoreH = pygame.image.load("includes/img/btn-scoreH.png")
+    btn_option= pygame.image.load("includes/img/btn-option.png")
+    btn_optionH= pygame.image.load("includes/img/btn-optionH.png")
+        
     screen.blit(bg,(0,0))
     pygame.display.flip()
  
