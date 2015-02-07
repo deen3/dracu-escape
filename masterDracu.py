@@ -22,13 +22,16 @@ def display_text(color, text, font_size, x, y, w, h):
     textRect = textSurface.get_rect()
     textRect.center = ((x+(w/2)), (y+(h/2)))
     return textSurface, textRect
+
+def menu():
+    bg = pygame.image.load("includes/img/bg.png")
+    screen.blit(bg,(0,0))
+    pygame.display.flip()
  
 def main():
     """ Main Program """
     
     # load images to use
-    icon = pygame.image.load("includes/img/icon.png")
-    logo = pygame.image.load("includes/img/dracu-logo.png")
     btn = pygame.image.load("includes/img/btn.png")
     p = pygame.image.load("includes/img/play.png")
     pH = pygame.image.load("includes/img/playH.png")
@@ -41,9 +44,6 @@ def main():
     btn_play = p
     btn_menu = m 
  
-    pygame.display.set_caption("DRACU-ESCAPE")
-    pygame.display.set_icon(icon)
-
     # play music if ON
     conn = sqlite3.connect("dracuDb.s3db")
     cur = conn.execute("SELECT * FROM dracuOption")
@@ -192,9 +192,6 @@ def main():
         current_level.draw(screen)
         active_sprite_list.draw(screen)
         
-        # display logo
-        screen.blit(logo,(5,545))
-        
         # display menu buttons if not play
         if not play:
             if play_again:
@@ -227,9 +224,20 @@ def main():
 if __name__ == "__main__":
     pygame.init()
     pygame.font.init()
- 
+
+    # load images to use
+    icon = pygame.image.load("includes/img/icon.png")
+    logo = pygame.image.load("includes/img/dracu-logo.png")
+    
     # Set the height and width of the screen
     size = [constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT]
     screen = pygame.display.set_mode(size)
+
+    pygame.display.set_caption("DRACU-ESCAPE")
+    pygame.display.set_icon(icon)
     
-    main()
+    # display logo
+    screen.blit(logo,(5,545))
+
+    menu()
+    #main()
