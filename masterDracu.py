@@ -35,8 +35,13 @@ def menu():
     btn_scoreH = pygame.image.load("includes/img/btn-scoreH.png")
     btn_option= pygame.image.load("includes/img/btn-option.png")
     btn_optionH= pygame.image.load("includes/img/btn-optionH.png")
-        
+
+    # ALL CODE TO DRAW SHOULD GO BELOW THIS COMMENT    
     screen.blit(bg,(0,0))
+    screen.blit(btn_playH, (555,150))
+    # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
+
+    # updating the screen
     pygame.display.flip()
  
 def main():
