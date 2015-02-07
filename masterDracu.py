@@ -29,20 +29,45 @@ def menu():
     bg_sub = pygame.image.load("includes/img/bg-sub.png")
     btn_menu = pygame.image.load("includes/img/btn-menu.png")
     btn_menuH = pygame.image.load("includes/img/btn-menuH.png")
-    btn_play = pygame.image.load("includes/img/btn-play.png")
-    btn_playH = pygame.image.load("includes/img/btn-playH.png")
+    p = pygame.image.load("includes/img/btn-play.png")
+    pH = pygame.image.load("includes/img/btn-playH.png")
     btn_score = pygame.image.load("includes/img/btn-score.png")
     btn_scoreH = pygame.image.load("includes/img/btn-scoreH.png")
     btn_option= pygame.image.load("includes/img/btn-option.png")
     btn_optionH= pygame.image.load("includes/img/btn-optionH.png")
 
-    # ALL CODE TO DRAW SHOULD GO BELOW THIS COMMENT    
-    screen.blit(bg,(0,0))
-    screen.blit(btn_playH, (555,150))
-    # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
+    # initialize button images
+    btn_play = p
 
-    # updating the screen
-    pygame.display.flip()
+    exit_menu = False
+
+    # Used to manage how fast the screen updates
+    clock = pygame.time.Clock()
+
+    while not exit_menu:
+        print("over")
+        # ALL CODE FOR BUTTON INTERACTIONS GO BELOW THIS COMMENT
+##        mouse = pygame.mouse.get_pos()
+##        click = pygame.mouse.get_pressed()
+
+##        if 555+188 > mouse[0] > 555 and 150+42 > mouse[1] > 150:
+##            btn_play = pH
+##        else:
+##            btn_play = p
+        # ALL CODE FOR BUTTON INTERACTOINS GO ABOVE THIS COMMENT
+
+        # ALL CODE TO DRAW SHOULD GO BELOW THIS COMMENT    
+        screen.blit(bg,(0,0))
+        screen.blit(btn_play, (555,150))
+        screen.blit(btn_score, (555,235))
+        screen.blit(btn_option, (555,315))
+        # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
+
+        # Limit to 120 frames per second
+        clock.tick(480) 
+     
+        # updating the screen
+        pygame.display.flip()
  
 def main():
     """ Main Program """
@@ -227,7 +252,7 @@ def main():
         # scoring depends on time
         score += 1
      
-        # Limit to 120 frames per second
+        # Limit to 480 frames per second
         clock.tick(480) 
      
         # Updating the screen...
