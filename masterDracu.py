@@ -13,8 +13,7 @@ import levels
 
 from itertools import chain
 from dracu import Dracu
-
-        
+ 
 def display_text(color, text, font_size, x, y, w, h):
     pygame.font.init()
     
@@ -23,8 +22,7 @@ def display_text(color, text, font_size, x, y, w, h):
     textRect = textSurface.get_rect()
     textRect.center = ((x+(w/2)), (y+(h/2)))
     return textSurface, textRect
-
-    
+ 
 def main():
     """ Main Program """
     
