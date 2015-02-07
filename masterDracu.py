@@ -39,35 +39,28 @@ def menu():
     # initialize button images
     btn_play = p
 
-    exit_menu = False
+    loop_menu = True
 
-    # Used to manage how fast the screen updates
-    clock = pygame.time.Clock()
+    # ALL CODE FOR BUTTON INTERACTIONS GO BELOW THIS COMMENT
+    mouse = pygame.mouse.get_pos()
+    click = pygame.mouse.get_pressed()
 
-    while not exit_menu:
+    if 555+188 > mouse[0] > 555 and 150+42 > mouse[1] > 150:
+        btn_play = pH
         print("over")
-        # ALL CODE FOR BUTTON INTERACTIONS GO BELOW THIS COMMENT
-##        mouse = pygame.mouse.get_pos()
-##        click = pygame.mouse.get_pressed()
+    else:
+        btn_play = p
+    # ALL CODE FOR BUTTON INTERACTOINS GO ABOVE THIS COMMENT
 
-##        if 555+188 > mouse[0] > 555 and 150+42 > mouse[1] > 150:
-##            btn_play = pH
-##        else:
-##            btn_play = p
-        # ALL CODE FOR BUTTON INTERACTOINS GO ABOVE THIS COMMENT
+    # ALL CODE TO DRAW SHOULD GO BELOW THIS COMMENT    
+    screen.blit(bg,(0,0))
+    screen.blit(btn_play, (555,150))
+    screen.blit(btn_score, (555,235))
+    screen.blit(btn_option, (555,315))
+    # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
 
-        # ALL CODE TO DRAW SHOULD GO BELOW THIS COMMENT    
-        screen.blit(bg,(0,0))
-        screen.blit(btn_play, (555,150))
-        screen.blit(btn_score, (555,235))
-        screen.blit(btn_option, (555,315))
-        # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
-
-        # Limit to 120 frames per second
-        clock.tick(480) 
-     
-        # updating the screen
-        pygame.display.flip()
+    # updating the screen
+    pygame.display.flip()
  
 def main():
     """ Main Program """
@@ -252,7 +245,7 @@ def main():
         # scoring depends on time
         score += 1
      
-        # Limit to 480 frames per second
+        # Limit to 120 frames per second
         clock.tick(480) 
      
         # Updating the screen...
