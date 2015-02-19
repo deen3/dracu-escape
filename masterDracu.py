@@ -22,45 +22,6 @@ def display_text(color, text, font_size, x, y, w, h):
     textRect = textSurface.get_rect()
     textRect.center = ((x+(w/2)), (y+(h/2)))
     return textSurface, textRect
-
-def menu():
-    # load images to use
-    bg = pygame.image.load("includes/img/bg.png")
-    bg_sub = pygame.image.load("includes/img/bg-sub.png")
-    btn_menu = pygame.image.load("includes/img/btn-menu.png")
-    btn_menuH = pygame.image.load("includes/img/btn-menuH.png")
-    p = pygame.image.load("includes/img/btn-play.png")
-    pH = pygame.image.load("includes/img/btn-playH.png")
-    btn_score = pygame.image.load("includes/img/btn-score.png")
-    btn_scoreH = pygame.image.load("includes/img/btn-scoreH.png")
-    btn_option= pygame.image.load("includes/img/btn-option.png")
-    btn_optionH= pygame.image.load("includes/img/btn-optionH.png")
-
-    # initialize button images
-    btn_play = p
-
-    loop_menu = True
-    while loop_menu:
-        # ALL CODE FOR BUTTON INTERACTIONS GO BELOW THIS COMMENT
-        mouse = pygame.mouse.get_pos()
-        click = pygame.mouse.get_pressed()
-
-        if 555+188 > mouse[0] > 555 and 150+42 > mouse[1] > 150:
-            btn_play = pH
-            print("over")
-        else:
-            btn_play = p
-        # ALL CODE FOR BUTTON INTERACTOINS GO ABOVE THIS COMMENT
-
-        # ALL CODE TO DRAW SHOULD GO BELOW THIS COMMENT    
-        screen.blit(bg,(0,0))
-        screen.blit(btn_play, (555,150))
-        screen.blit(btn_score, (555,235))
-        screen.blit(btn_option, (555,315))
-        # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
-
-        # updating the screen
-        pygame.display.flip()
  
 def main():
     """ Main Program """
@@ -73,6 +34,7 @@ def main():
     pAH = pygame.image.load("includes/img/playAH.png")
     m = pygame.image.load("includes/img/back-to-menu.png")
     mH = pygame.image.load("includes/img/back-to-menuH.png")
+    logo = pygame.image.load("includes/img/dracu-logo.png")
 
     # set the initial image of the buttons
     btn_play = p
@@ -239,6 +201,10 @@ def main():
             screen.blit(btn,(580,5))
             textSurface, textRect = display_text(constants.WHITE,"Score: "+str(score), 20,600,0,150,50,)
             screen.blit(textSurface, textRect)
+
+        
+        # display logo
+        screen.blit(logo,(5,545))
             
         # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
 
@@ -261,7 +227,6 @@ if __name__ == "__main__":
 
     # load images to use
     icon = pygame.image.load("includes/img/icon.png")
-    logo = pygame.image.load("includes/img/dracu-logo.png")
     
     # Set the height and width of the screen
     size = [constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT]
@@ -270,8 +235,4 @@ if __name__ == "__main__":
     pygame.display.set_caption("DRACU-ESCAPE")
     pygame.display.set_icon(icon)
     
-    # display logo
-    screen.blit(logo,(5,545))
-
-    menu()
-    #main()
+    main()
