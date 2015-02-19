@@ -40,27 +40,27 @@ def menu():
     btn_play = p
 
     loop_menu = True
+    while loop_menu:
+        # ALL CODE FOR BUTTON INTERACTIONS GO BELOW THIS COMMENT
+        mouse = pygame.mouse.get_pos()
+        click = pygame.mouse.get_pressed()
 
-    # ALL CODE FOR BUTTON INTERACTIONS GO BELOW THIS COMMENT
-    mouse = pygame.mouse.get_pos()
-    click = pygame.mouse.get_pressed()
+        if 555+188 > mouse[0] > 555 and 150+42 > mouse[1] > 150:
+            btn_play = pH
+            print("over")
+        else:
+            btn_play = p
+        # ALL CODE FOR BUTTON INTERACTOINS GO ABOVE THIS COMMENT
 
-    if 555+188 > mouse[0] > 555 and 150+42 > mouse[1] > 150:
-        btn_play = pH
-        print("over")
-    else:
-        btn_play = p
-    # ALL CODE FOR BUTTON INTERACTOINS GO ABOVE THIS COMMENT
+        # ALL CODE TO DRAW SHOULD GO BELOW THIS COMMENT    
+        screen.blit(bg,(0,0))
+        screen.blit(btn_play, (555,150))
+        screen.blit(btn_score, (555,235))
+        screen.blit(btn_option, (555,315))
+        # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
 
-    # ALL CODE TO DRAW SHOULD GO BELOW THIS COMMENT    
-    screen.blit(bg,(0,0))
-    screen.blit(btn_play, (555,150))
-    screen.blit(btn_score, (555,235))
-    screen.blit(btn_option, (555,315))
-    # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
-
-    # updating the screen
-    pygame.display.flip()
+        # updating the screen
+        pygame.display.flip()
  
 def main():
     """ Main Program """
